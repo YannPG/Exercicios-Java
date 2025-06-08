@@ -8,11 +8,13 @@ import java.util.Scanner;
 public class MenuMetodo implements MenuInterface {
 
     private final ControllerInterface calculadoraController;
+    private final ControllerInterface verificarPalindromoController;
     private final Scanner scanner;
 
-    public MenuMetodo(Scanner scanner, ControllerInterface calculadoraController) {
+    public MenuMetodo(Scanner scanner, ControllerInterface calculadoraController, ControllerInterface verificarPalindromoController) {
         this.scanner = scanner;
         this.calculadoraController = calculadoraController;
+        this.verificarPalindromoController = verificarPalindromoController;
     }
 
     @Override
@@ -21,6 +23,7 @@ public class MenuMetodo implements MenuInterface {
         do {
             System.out.println("\n===== MENU DE MÉTODOS =====");
             System.out.println("1. Calculadora Simples");
+            System.out.println("2. Verifica Palíndromos");
             System.out.println("0. Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -29,6 +32,9 @@ public class MenuMetodo implements MenuInterface {
 
             if (opcao == 1) {
                 this.calculadoraController.executar();
+            }
+            if(opcao == 2){
+                this.verificarPalindromoController.executar();
             }
 
         } while (opcao != 0);
