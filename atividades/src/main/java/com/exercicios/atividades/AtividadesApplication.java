@@ -7,6 +7,8 @@ import com.exercicios.atividades.application.exercicio1.UseCase.SomaUseCase;
 import com.exercicios.atividades.application.exercicio1.UseCase.SubtrairUseCase;
 import com.exercicios.atividades.application.exercicio2.UseCase.VerificarPalindromoUseCase;
 import com.exercicios.atividades.application.exercicio2.VerificarPalindromos.VerificarPalindromoController;
+import com.exercicios.atividades.application.exercicio3.FatorialController.FatorialController;
+import com.exercicios.atividades.application.exercicio3.FatorialUseCase.CalcularFatorialUseCase;
 import com.exercicios.atividades.infra.menus.MenuMetodo;
 import com.exercicios.atividades.infra.menus.MenuPrincipal;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
@@ -24,8 +26,10 @@ public class AtividadesApplication {
 		SubtrairUseCase subtrairUseCase = new SubtrairUseCase();
 		MultiplicarUseCase multiplicarUseCase = new MultiplicarUseCase();
 		DividirUseCase dividirUseCase = new DividirUseCase();
-		//VerificarPalindromo
+		//Verificar Palindromo
 		VerificarPalindromoUseCase verificarPalindromoUseCase = new VerificarPalindromoUseCase();
+		//Calcular Fatorial
+		CalcularFatorialUseCase calcularFatorialUseCase = new CalcularFatorialUseCase();
 
 		ControllerInterface calculadoraController = new CalculadoraController(
 				dividirUseCase,
@@ -40,7 +44,12 @@ public class AtividadesApplication {
 				scanner
 		);
 
-		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController);
+		ControllerInterface calcularFatorialController = new FatorialController(
+				calcularFatorialUseCase,
+				scanner
+		);
+
+		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController);
 		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos);
 
 		menuPrincipal.exibir();
