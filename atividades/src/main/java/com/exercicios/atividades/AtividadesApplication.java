@@ -9,6 +9,9 @@ import com.exercicios.atividades.application.exercicio2.UseCase.VerificarPalindr
 import com.exercicios.atividades.application.exercicio2.VerificarPalindromos.VerificarPalindromoController;
 import com.exercicios.atividades.application.exercicio3.FatorialController.FatorialController;
 import com.exercicios.atividades.application.exercicio3.FatorialUseCase.CalcularFatorialUseCase;
+import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaController.ConversorTemperaturaController;
+import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaUseCase.CelsiusFahrenheitUseCase;
+import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaUseCase.FahrenheitCelsiusUseCase;
 import com.exercicios.atividades.infra.menus.MenuMetodo;
 import com.exercicios.atividades.infra.menus.MenuPrincipal;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
@@ -30,6 +33,9 @@ public class AtividadesApplication {
 		VerificarPalindromoUseCase verificarPalindromoUseCase = new VerificarPalindromoUseCase();
 		//Calcular Fatorial
 		CalcularFatorialUseCase calcularFatorialUseCase = new CalcularFatorialUseCase();
+		//Converter Temperatura
+		CelsiusFahrenheitUseCase celsiusFahrenheitUseCase = new CelsiusFahrenheitUseCase();
+		FahrenheitCelsiusUseCase fahrenheitCelsiusUseCase = new FahrenheitCelsiusUseCase();
 
 		ControllerInterface calculadoraController = new CalculadoraController(
 				dividirUseCase,
@@ -49,7 +55,13 @@ public class AtividadesApplication {
 				scanner
 		);
 
-		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController);
+		ControllerInterface converterTemperaturaController = new ConversorTemperaturaController(
+				celsiusFahrenheitUseCase,
+				fahrenheitCelsiusUseCase,
+				scanner
+		);
+
+		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController, converterTemperaturaController);
 		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos);
 
 		menuPrincipal.exibir();
