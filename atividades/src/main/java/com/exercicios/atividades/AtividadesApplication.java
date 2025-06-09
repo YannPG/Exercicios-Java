@@ -19,12 +19,14 @@ import com.exercicios.atividades.application.exercicio6.SomaDiagonaisController.
 import com.exercicios.atividades.application.exercicio6.SomaDiagonaisUseCase.SomaDiagonaisUseCase;
 import com.exercicios.atividades.application.exercicio7.controller.ExerciciosDadosObjetoController;
 import com.exercicios.atividades.application.exercicio8.controller.TrocaValoresController;
-import com.exercicios.atividades.infra.menus.MenuMetodo;
-import com.exercicios.atividades.infra.menus.MenuPrincipal;
+import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionarioController.FuncionarioController;
+import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionarioUseCase.CadastrarFuncionarioUseCase;
+import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionarioUseCase.CalcularSalarioDepartamentoUseCase;
+import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionarioUseCase.ListarFuncionarioUseCase;
+import com.exercicios.atividades.domain.repository.FuncionarioRepository;
+import com.exercicios.atividades.infra.menus.*;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
 import com.exercicios.atividades.infra.interfaces.MenuInterface;
-import com.exercicios.atividades.infra.menus.MenuManipulacaoObjetos;
-import com.exercicios.atividades.infra.menus.MenuMatriz;
 
 import java.util.Scanner;
 
@@ -51,6 +53,12 @@ public class AtividadesApplication {
 		MaiorMenorElementoUseCase maiorMenorElementoUseCase = new MaiorMenorElementoUseCase();
 		//Somar Diagonais
 		SomaDiagonaisUseCase somaDiagonaisUseCase = new SomaDiagonaisUseCase();
+
+		//Classe e objetos
+		FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+		ListarFuncionarioUseCase listarFuncionariosUseCase = new ListarFuncionarioUseCase(funcionarioRepository);
+		CalcularSalarioDepartamentoUseCase calcularSalarioDepartamentoUseCase = new CalcularSalarioDepartamentoUseCase(funcionarioRepository);
+		CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(funcionarioRepository);
 
 		ControllerInterface calculadoraController = new CalculadoraController(
 				dividirUseCase,
@@ -92,10 +100,13 @@ public class AtividadesApplication {
 
 		ControllerInterface trocaValoresController = new TrocaValoresController(scanner);
 
+		ControllerInterface gerenciamentoFuncionarioController = new FuncionarioController(scanner, listarFuncionariosUseCase, calcularSalarioDepartamentoUseCase, cadastrarFuncionarioUseCase);
+
 		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController, converterTemperaturaController);
 		MenuInterface menuMatriz = new MenuMatriz(scanner, matrizController,somaDiagonaisController);
 		MenuInterface menuManipulacaoObjetos = new MenuManipulacaoObjetos(scanner, exerciciosDadosObjetoController, trocaValoresController);
-		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz, menuManipulacaoObjetos);
+		MenuInterface menuClassesObjetos = new MenuClassesObjetos(scanner, gerenciamentoFuncionarioController);
+		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz, menuManipulacaoObjetos, menuClassesObjetos);
 
 		menuPrincipal.exibir();
 
