@@ -12,10 +12,14 @@ import com.exercicios.atividades.application.exercicio3.FatorialUseCase.Calcular
 import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaController.ConversorTemperaturaController;
 import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaUseCase.CelsiusFahrenheitUseCase;
 import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaUseCase.FahrenheitCelsiusUseCase;
+import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizController.matrizController;
+import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizUseCase.InserirMatrizUseCase;
+import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizUseCase.MaiorMenorElementoUseCase;
 import com.exercicios.atividades.infra.menus.MenuMetodo;
 import com.exercicios.atividades.infra.menus.MenuPrincipal;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
 import com.exercicios.atividades.infra.interfaces.MenuInterface;
+import com.exercicios.atividades.infra.menus.menuMatriz;
 
 import java.util.Scanner;
 
@@ -36,6 +40,10 @@ public class AtividadesApplication {
 		//Converter Temperatura
 		CelsiusFahrenheitUseCase celsiusFahrenheitUseCase = new CelsiusFahrenheitUseCase();
 		FahrenheitCelsiusUseCase fahrenheitCelsiusUseCase = new FahrenheitCelsiusUseCase();
+
+		//Matriz
+		InserirMatrizUseCase inserirMatrizUseCase = new InserirMatrizUseCase();
+		MaiorMenorElementoUseCase maiorMenorElementoUseCase = new MaiorMenorElementoUseCase();
 
 		ControllerInterface calculadoraController = new CalculadoraController(
 				dividirUseCase,
@@ -61,8 +69,15 @@ public class AtividadesApplication {
 				scanner
 		);
 
+		ControllerInterface matrizController = new matrizController(
+				inserirMatrizUseCase,
+				maiorMenorElementoUseCase,
+				scanner
+		);
+
 		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController, converterTemperaturaController);
-		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos);
+		MenuInterface menuMatriz = new menuMatriz(scanner, matrizController);
+		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz);
 
 		menuPrincipal.exibir();
 
