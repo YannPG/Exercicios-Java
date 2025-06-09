@@ -15,13 +15,15 @@ import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaUseC
 import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizController.matrizController;
 import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizUseCase.InserirMatrizUseCase;
 import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizUseCase.MaiorMenorElementoUseCase;
-import com.exercicios.atividades.application.exercicios6.SomaDiagonaisController.SomaDiagonaisController;
-import com.exercicios.atividades.application.exercicios6.SomaDiagonaisUseCase.SomaDiagonaisUseCase;
+import com.exercicios.atividades.application.exercicio6.SomaDiagonaisController.SomaDiagonaisController;
+import com.exercicios.atividades.application.exercicio6.SomaDiagonaisUseCase.SomaDiagonaisUseCase;
+import com.exercicios.atividades.application.exercicio7.controller.ExerciciosDadosObjetoController;
 import com.exercicios.atividades.infra.menus.MenuMetodo;
 import com.exercicios.atividades.infra.menus.MenuPrincipal;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
 import com.exercicios.atividades.infra.interfaces.MenuInterface;
-import com.exercicios.atividades.infra.menus.menuMatriz;
+import com.exercicios.atividades.infra.menus.MenuManipulacaoObjetos;
+import com.exercicios.atividades.infra.menus.MenuMatriz;
 
 import java.util.Scanner;
 
@@ -85,9 +87,12 @@ public class AtividadesApplication {
 				scanner
 		);
 
+		ControllerInterface exerciciosDadosObjetoController = new ExerciciosDadosObjetoController();
+
 		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController, converterTemperaturaController);
-		MenuInterface menuMatriz = new menuMatriz(scanner, matrizController,somaDiagonaisController);
-		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz);
+		MenuInterface menuMatriz = new MenuMatriz(scanner, matrizController,somaDiagonaisController);
+		MenuInterface menuManipulacaoObjetos = new MenuManipulacaoObjetos(scanner, exerciciosDadosObjetoController);
+		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz, menuManipulacaoObjetos);
 
 		menuPrincipal.exibir();
 
