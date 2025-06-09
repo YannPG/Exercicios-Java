@@ -9,10 +9,12 @@ public class menuMatriz implements MenuInterface {
 
     private final Scanner scanner;
     private final ControllerInterface matrizMaiorMenorController;
+    private final ControllerInterface somaDiagonalController;
 
-    public menuMatriz(Scanner scanner,ControllerInterface matrizMaiorMenorController) {
+    public menuMatriz(Scanner scanner,ControllerInterface matrizMaiorMenorController, ControllerInterface somaDiagonalController) {
         this.scanner = scanner;
         this.matrizMaiorMenorController = matrizMaiorMenorController;
+        this.somaDiagonalController = somaDiagonalController;
     }
 
     @Override
@@ -21,6 +23,7 @@ public class menuMatriz implements MenuInterface {
         do {
             System.out.println("\n===== MENU DE MATRIZ =====");
             System.out.println("1. Verificar maior e menor dentro da matriz");
+            System.out.println("2. Calcular diagonal principal e secundária");
             System.out.println("0. Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -30,6 +33,10 @@ public class menuMatriz implements MenuInterface {
             if (opcao == 1) {
                 this.matrizMaiorMenorController.executar();
             }
+            if (opcao == 2){
+                this.somaDiagonalController.executar();
+            }
+
         } while (opcao != 0);
     }
 }
