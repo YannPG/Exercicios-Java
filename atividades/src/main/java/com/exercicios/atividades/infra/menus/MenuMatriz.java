@@ -5,13 +5,13 @@ import com.exercicios.atividades.infra.interfaces.MenuInterface;
 
 import java.util.Scanner;
 
-public class menuMatriz implements MenuInterface {
+public class MenuMatriz implements MenuInterface {
 
     private final Scanner scanner;
     private final ControllerInterface matrizMaiorMenorController;
     private final ControllerInterface somaDiagonalController;
 
-    public menuMatriz(Scanner scanner,ControllerInterface matrizMaiorMenorController, ControllerInterface somaDiagonalController) {
+    public MenuMatriz(Scanner scanner, ControllerInterface matrizMaiorMenorController, ControllerInterface somaDiagonalController) {
         this.scanner = scanner;
         this.matrizMaiorMenorController = matrizMaiorMenorController;
         this.somaDiagonalController = somaDiagonalController;
