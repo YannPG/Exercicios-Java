@@ -15,6 +15,8 @@ import com.exercicios.atividades.application.exercicio4.ConversorTemperaturaUseC
 import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizController.matrizController;
 import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizUseCase.InserirMatrizUseCase;
 import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizUseCase.MaiorMenorElementoUseCase;
+import com.exercicios.atividades.application.exercicios6.SomaDiagonaisController.SomaDiagonaisController;
+import com.exercicios.atividades.application.exercicios6.SomaDiagonaisUseCase.SomaDiagonaisUseCase;
 import com.exercicios.atividades.infra.menus.MenuMetodo;
 import com.exercicios.atividades.infra.menus.MenuPrincipal;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
@@ -44,6 +46,8 @@ public class AtividadesApplication {
 		//Matriz
 		InserirMatrizUseCase inserirMatrizUseCase = new InserirMatrizUseCase();
 		MaiorMenorElementoUseCase maiorMenorElementoUseCase = new MaiorMenorElementoUseCase();
+		//Somar Diagonais
+		SomaDiagonaisUseCase somaDiagonaisUseCase = new SomaDiagonaisUseCase();
 
 		ControllerInterface calculadoraController = new CalculadoraController(
 				dividirUseCase,
@@ -75,8 +79,14 @@ public class AtividadesApplication {
 				scanner
 		);
 
+		ControllerInterface somaDiagonaisController = new SomaDiagonaisController(
+				inserirMatrizUseCase,
+				somaDiagonaisUseCase,
+				scanner
+		);
+
 		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController, converterTemperaturaController);
-		MenuInterface menuMatriz = new menuMatriz(scanner, matrizController);
+		MenuInterface menuMatriz = new menuMatriz(scanner, matrizController,somaDiagonaisController);
 		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz);
 
 		menuPrincipal.exibir();
