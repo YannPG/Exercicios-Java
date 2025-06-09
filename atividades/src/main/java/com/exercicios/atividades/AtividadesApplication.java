@@ -5,6 +5,10 @@ import com.exercicios.atividades.application.exercicio1.UseCase.DividirUseCase;
 import com.exercicios.atividades.application.exercicio1.UseCase.MultiplicarUseCase;
 import com.exercicios.atividades.application.exercicio1.UseCase.SomaUseCase;
 import com.exercicios.atividades.application.exercicio1.UseCase.SubtrairUseCase;
+import com.exercicios.atividades.application.exercicio10.AgendaContatoController.ContatoController;
+import com.exercicios.atividades.application.exercicio10.AgendaContatoUseCase.AdicionarContatoUseCase;
+import com.exercicios.atividades.application.exercicio10.AgendaContatoUseCase.ListarContatosUseCase;
+import com.exercicios.atividades.application.exercicio10.AgendaContatoUseCase.ProcurarContatoUseCase;
 import com.exercicios.atividades.application.exercicio2.UseCase.VerificarPalindromoUseCase;
 import com.exercicios.atividades.application.exercicio2.VerificarPalindromos.VerificarPalindromoController;
 import com.exercicios.atividades.application.exercicio3.FatorialController.FatorialController;
@@ -23,6 +27,7 @@ import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionario
 import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionarioUseCase.CadastrarFuncionarioUseCase;
 import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionarioUseCase.CalcularSalarioDepartamentoUseCase;
 import com.exercicios.atividades.application.exercicio9.GerenciamentoFuncionarioUseCase.ListarFuncionarioUseCase;
+import com.exercicios.atividades.domain.repository.ContatoRepository;
 import com.exercicios.atividades.domain.repository.FuncionarioRepository;
 import com.exercicios.atividades.infra.menus.*;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
@@ -59,6 +64,11 @@ public class AtividadesApplication {
 		ListarFuncionarioUseCase listarFuncionariosUseCase = new ListarFuncionarioUseCase(funcionarioRepository);
 		CalcularSalarioDepartamentoUseCase calcularSalarioDepartamentoUseCase = new CalcularSalarioDepartamentoUseCase(funcionarioRepository);
 		CadastrarFuncionarioUseCase cadastrarFuncionarioUseCase = new CadastrarFuncionarioUseCase(funcionarioRepository);
+		//Agenda Contato
+		ContatoRepository contatoRepository = new ContatoRepository();
+		AdicionarContatoUseCase adicionarContatoUseCase = new AdicionarContatoUseCase(contatoRepository);
+		ListarContatosUseCase listarContatosUseCase = new ListarContatosUseCase(contatoRepository);
+		ProcurarContatoUseCase procurarContatoUseCase = new ProcurarContatoUseCase(contatoRepository);
 
 		ControllerInterface calculadoraController = new CalculadoraController(
 				dividirUseCase,
@@ -100,12 +110,24 @@ public class AtividadesApplication {
 
 		ControllerInterface trocaValoresController = new TrocaValoresController(scanner);
 
-		ControllerInterface gerenciamentoFuncionarioController = new FuncionarioController(scanner, listarFuncionariosUseCase, calcularSalarioDepartamentoUseCase, cadastrarFuncionarioUseCase);
+		ControllerInterface gerenciamentoFuncionarioController = new FuncionarioController(
+				scanner,
+				listarFuncionariosUseCase,
+				calcularSalarioDepartamentoUseCase,
+				cadastrarFuncionarioUseCase
+		);
+
+		ControllerInterface agendaContatoController = new ContatoController(
+				scanner,
+				adicionarContatoUseCase,
+				listarContatosUseCase,
+				procurarContatoUseCase
+		);
 
 		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController, converterTemperaturaController);
 		MenuInterface menuMatriz = new MenuMatriz(scanner, matrizController,somaDiagonaisController);
 		MenuInterface menuManipulacaoObjetos = new MenuManipulacaoObjetos(scanner, exerciciosDadosObjetoController, trocaValoresController);
-		MenuInterface menuClassesObjetos = new MenuClassesObjetos(scanner, gerenciamentoFuncionarioController);
+		MenuInterface menuClassesObjetos = new MenuClassesObjetos(scanner, gerenciamentoFuncionarioController, agendaContatoController);
 		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz, menuManipulacaoObjetos, menuClassesObjetos);
 
 		menuPrincipal.exibir();
