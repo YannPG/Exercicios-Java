@@ -1,4 +1,4 @@
-package com.exercicios.atividades.application.exercicios6.SomaDiagonaisUseCase;
+package com.exercicios.atividades.application.exercicio6.SomaDiagonaisUseCase;
 
 import com.exercicios.atividades.domain.entity.MatrizDomain;
 

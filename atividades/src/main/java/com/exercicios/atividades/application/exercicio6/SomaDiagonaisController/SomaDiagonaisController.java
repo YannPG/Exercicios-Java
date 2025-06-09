@@ -1,7 +1,7 @@
-package com.exercicios.atividades.application.exercicios6.SomaDiagonaisController;
+package com.exercicios.atividades.application.exercicio6.SomaDiagonaisController;
 
 import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatrizUseCase.InserirMatrizUseCase;
-import com.exercicios.atividades.application.exercicios6.SomaDiagonaisUseCase.SomaDiagonaisUseCase;
+import com.exercicios.atividades.application.exercicio6.SomaDiagonaisUseCase.SomaDiagonaisUseCase;
 import com.exercicios.atividades.domain.entity.MatrizDomain;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
 
