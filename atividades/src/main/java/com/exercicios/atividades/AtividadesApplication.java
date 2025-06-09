@@ -18,6 +18,7 @@ import com.exercicios.atividades.application.exercicio5.MaiorMenorElementoMatriz
 import com.exercicios.atividades.application.exercicio6.SomaDiagonaisController.SomaDiagonaisController;
 import com.exercicios.atividades.application.exercicio6.SomaDiagonaisUseCase.SomaDiagonaisUseCase;
 import com.exercicios.atividades.application.exercicio7.controller.ExerciciosDadosObjetoController;
+import com.exercicios.atividades.application.exercicio8.controller.TrocaValoresController;
 import com.exercicios.atividades.infra.menus.MenuMetodo;
 import com.exercicios.atividades.infra.menus.MenuPrincipal;
 import com.exercicios.atividades.infra.interfaces.ControllerInterface;
@@ -89,9 +90,11 @@ public class AtividadesApplication {
 
 		ControllerInterface exerciciosDadosObjetoController = new ExerciciosDadosObjetoController();
 
+		ControllerInterface trocaValoresController = new TrocaValoresController(scanner);
+
 		MenuInterface menuMetodos = new MenuMetodo(scanner, calculadoraController, verificarPalindromoController, calcularFatorialController, converterTemperaturaController);
 		MenuInterface menuMatriz = new MenuMatriz(scanner, matrizController,somaDiagonaisController);
-		MenuInterface menuManipulacaoObjetos = new MenuManipulacaoObjetos(scanner, exerciciosDadosObjetoController);
+		MenuInterface menuManipulacaoObjetos = new MenuManipulacaoObjetos(scanner, exerciciosDadosObjetoController, trocaValoresController);
 		MenuInterface menuPrincipal = new MenuPrincipal(scanner, menuMetodos, menuMatriz, menuManipulacaoObjetos);
 
 		menuPrincipal.exibir();
